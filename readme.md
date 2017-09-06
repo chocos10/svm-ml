@@ -8,11 +8,13 @@ The data used in this project is the Wisconsin Diagnostic Breast Cancer (WDBC) D
 
 Fig. 1. Illustration of FNA Biopsy
 
-![Fig. 1. Illustration of FNA Biopsy](images/f1-fna-biopsy.png)
+<img src="images/f1-fna-biopsy.png" alt="Fig. 1. Illustration of FNA Biopsy" width="320" />
 
 Fig. 2. Image of cells from FNA
 
-![Fig. 2. Image of cells from FNA](images/f2-cells-fna.png)
+<img src="images/f2-cells-fna.png" alt="Fig. 2. Image of cells from FNA" width="320" />
+
+
 
 Each sample has 30 real-valued features that have been computed from a digitized image of a fine needle aspirate of a breast mass. They describe characteristics of the cell nuclei present in the image. In addition to these 30 features, each sample also contains a number (which serves
 as an ID for the sample) and a label of either B (for benign) or M (for malignant). Thus, each type of label defines a class.
@@ -65,15 +67,14 @@ The margin can be of two types –
 
 Fig 3. Optimal hyperplane with hard margin
 
-![Fig 3. Optimal hyperplane with hard margin](images/f3-op-hm.png)
+<img src="images/f3-op-hm.png" alt="Fig 3. Optimal hyperplane with hard margin" width="320" />
 
 Fig 4. Optimal hyperplane with soft margin
 
-![Fig 4. Optimal hyperplane with soft margin](images/f4-op-sm.png)
+<img src="images/f4-op-sm.png" alt="Fig 4. Optimal hyperplane with soft margin" width="320" />
 
 Another approach for sample that are not linearly separable is to transform them to higher dimensions. This increases the probability of the samples being linearly separable in higher dimensional space. The transformation can be achieved by using a kernel. For this classification, we use linear and polynomial kernels.
 
 Fig 5. Transformation to higher dimensional space using a kernel
 
-![Fig 5. Transformation to higher dimensional space using a kernel](images/f5-fx-using-kernel.png)
-
+<img src="images/f5-fx-using-kernel.png" alt="Fig 5. Transformation to higher dimensional space using a kernel" width="640" />
