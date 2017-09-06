@@ -6,14 +6,24 @@ This project demonstrates the implementation of Support Vector Machine (SVM) for
 
 The data used in this project is the Wisconsin Diagnostic Breast Cancer (WDBC) Data Set1. The samples were obtained by Fine Needle Aspiration (FNA) Biopsy, which is a procedure that involves passing a thin needle through the skin to sample fluid or tissue from a cyst or solid mass, as illustrated in Figure 1. The sample of cellular material taken during an FNA is then sent to a pathology laboratory for analysis. Figure 2 shows an image of cells obtained from FNA.
 
-Fig. 1. Illustration of FNA Biopsy
-
-<img src="images/f1-fna-biopsy.png" alt="Fig. 1. Illustration of FNA Biopsy" width="320" />
-
-Fig. 2. Image of cells from FNA
-
-<img src="images/f2-cells-fna.png" alt="Fig. 2. Image of cells from FNA" width="320" />
-
+<table>
+  <tr>
+    <td>
+      <img src="images/f1-fna-biopsy.png" alt="Fig. 1. Illustration of FNA Biopsy" width="320" />
+    </td>
+    <td>
+      <img src="images/f2-cells-fna.png" alt="Fig. 2. Image of cells from FNA" width="320" />
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <strong>Fig. 1. Illustration of FNA Biopsy</strong>
+    </td>
+    <td>
+      <strong>Fig. 2. Image of cells from FNA</strong>
+    </td>
+  </tr>
+</table>
 
 
 Each sample has 30 real-valued features that have been computed from a digitized image of a fine needle aspirate of a breast mass. They describe characteristics of the cell nuclei present in the image. In addition to these 30 features, each sample also contains a number (which serves
@@ -65,16 +75,162 @@ The margin can be of two types –
 1. **Hard margin**: This margin works best for data set where the samples strictly do not fall inside the region of separation.
 2. **Soft margin**: This margin works best for data set where samples may not linearly separable.
 
-Fig 3. Optimal hyperplane with hard margin
-
-<img src="images/f3-op-hm.png" alt="Fig 3. Optimal hyperplane with hard margin" width="320" />
-
-Fig 4. Optimal hyperplane with soft margin
-
-<img src="images/f4-op-sm.png" alt="Fig 4. Optimal hyperplane with soft margin" width="320" />
+<table>
+  <tr>
+    <td>
+      <img src="images/f3-op-hm.png" alt="Fig 3. Optimal hyperplane with hard margin" width="320" />
+    </td>
+    <td>
+      <img src="images/f4-op-sm.png" alt="Fig 4. Optimal hyperplane with soft margin" width="320" />
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <strong>Fig 3. Optimal hyperplane with hard margin</strong>
+    </td>
+    <td>
+      <strong>Fig 4. Optimal hyperplane with soft margin</strong>
+    </td>
+  </tr>
+</table>
 
 Another approach for sample that are not linearly separable is to transform them to higher dimensions. This increases the probability of the samples being linearly separable in higher dimensional space. The transformation can be achieved by using a kernel. For this classification, we use linear and polynomial kernels.
 
-Fig 5. Transformation to higher dimensional space using a kernel
+<table>
+  <tr>
+    <td>
+      <img src="images/f5-fx-using-kernel.png" alt="Fig 5. Transformation to higher dimensional space using a kernel" width="640" />
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <strong>Fig 5. Transformation to higher dimensional space using a kernel</strong>
+    </td>
+  </tr>
+</table>
 
-<img src="images/f5-fx-using-kernel.png" alt="Fig 5. Transformation to higher dimensional space using a kernel" width="640" />
+## Implementation
+
+### The Kernels
+
+1. A hard-margin SVM with a linear kernel - *K(x<sub>1</sub>, x<sub>2</sub>) = x<sup>T</sup><sub>1</sub>x<sub>2</sub>*
+
+2. A hard-margin SVM with a polynomial kernel - *K(x<sub>1</sub>, x<sub>2</sub>) = (x<sup>T</sup><sub>1</sub>x<sub>2</sub> + 1)<sup>p</sup>*
+
+   where the values of p are listed in Table 1.
+  
+3. A soft-margin SVM with a polynomial kernel as given in Equation (2) above, and with the values for p and C as listed in Table 1.
+
+The Kernel is implemented in get_kernel.m file. The third argument is the value of p. The Kernel is linear when p is 0 and polynomial otherwise.
+ 
+The algorithm for calculating the values of alpha and b0 is implemented in solve_alpha.m and solve_b0.m Matlab functions. Alpha is calculated using [quadprog](https://www.mathworks.com/help/optim/ug/quadprog.html) function in Matlab.
+
+### SVM
+
+A MATLAB (M-file) program to implement the SVMs with the discriminant functions found in the kernels above. Apply these SVMs to classify the given training set and test set, and report the classification results in Table 1 by filling in the values for the entries indicated by "?".
+
+1. t2_1_hmlk.m: SVM using hard margin with linear kernel
+2. t2_2_hmpk.m: SVM using hard margin with polynomial kernel
+3. t2_3_smpk.m: SVM using soft margin with polynomial kernel
+
+The execution results are listed below in Table 1. In all cases, the training accuracy is 100%. Test accuracy on the other hand drops in all cases. It is observed that the test performance of SVM with polynomial kernel increases with the value of p. The best performance can be seen in the below table where the value of p is 5.
+
+#### Result - Table 1
+
+<table>
+  <thead>
+    <tr>
+      <th>Type of SVM</th>
+      <th scope="col" colspan="4">Training accuracy</th>
+      <th scope="col" colspan="4">Test accuracy</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Hard margin with Linear kernel</td>
+      <td scope="col" colspan="4">1</td>
+      <td scope="col" colspan="4">0.91</td>
+    </tr>
+    <tr>
+      <td scope="row" rowspan="2">Hard margin with Polynomial kernel</td>
+      <td><em>p = 2</em></td>
+      <td><em>p = 3</em></td>
+      <td><em>p = 4</em></td>
+      <td><em>p = 5</em></td>
+      <td><em>p = 2</em></td>
+      <td><em>p = 3</em></td>
+      <td><em>p = 4</em></td>
+      <td><em>p = 5</em></td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0.91</td>
+      <td>0.92</td>
+      <td>0.89</td>
+      <td>0.97</td>
+    </tr>
+    <tr>
+      <td>Soft margin with Polynomial kernel</td>
+      <td><em>c = 0.1</em></td>
+      <td><em>c = 0.6</em></td>
+      <td><em>c = 1.1</em></td>
+      <td><em>c = 2.1</em></td>
+      <td><em>c = 0.1</em></td>
+      <td><em>c = 0.6</em></td>
+      <td><em>c = 1.1</em></td>
+      <td><em>c = 2.1</em></td>
+    </tr>
+    <tr>
+      <td><em>p = 2</em></td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0.92</td>
+      <td>0.91</td>
+      <td>0.91</td>
+      <td>0.91</td>
+    </tr>
+    <tr>
+      <td><em>p = 3</em></td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0.92</td>
+      <td>0.93</td>
+      <td>0.92</td>
+      <td>0.92</td>
+    </tr>
+    <tr>
+      <td><em>p = 4</em></td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0.90</td>
+      <td>0.89</td>
+      <td>0.90</td>
+      <td>0.90</td>
+    </tr>
+    <tr>
+      <td><em>p = 5</em></td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0.97</td>
+      <td>0.97</td>
+      <td>0.96</td>
+      <td>0.97</td>
+    </tr>
+  </tbody>
+</table>
+
+> Accuracy plots
+
+<img src="images/f6-accu.png" alt="Fig 6. Accuracy plots" width="640" />
+
