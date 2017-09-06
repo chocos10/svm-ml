@@ -230,7 +230,7 @@ The execution results are listed below in Table 1. In all cases, the training ac
   </tbody>
 </table>
 
-> Accuracy plots
+> **Accuracy plots**
 
 <img src="images/f6-accu.png" alt="Fig 6. Accuracy plots" width="640" />
 
